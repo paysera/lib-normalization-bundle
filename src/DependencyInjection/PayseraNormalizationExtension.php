@@ -11,6 +11,11 @@ use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 
 class PayseraNormalizationExtension extends Extension
 {
+    public static function supportsAutoconfiguration()
+    {
+        return method_exists(ContainerBuilder::class, 'registerForAutoconfiguration');
+    }
+
     public function load(array $configs, ContainerBuilder $container)
     {
         $configuration = new Configuration();
@@ -31,10 +36,5 @@ class PayseraNormalizationExtension extends Extension
             $container->setParameter('paysera_normalization.date_time_normalizer.format', $dateTimeFormat);
             $loader->load('services/date_time_normalizer.xml');
         }
-    }
-
-    public static function supportsAutoconfiguration()
-    {
-        return method_exists(ContainerBuilder::class, 'registerForAutoconfiguration');
     }
 }

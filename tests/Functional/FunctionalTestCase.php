@@ -16,7 +16,7 @@ abstract class FunctionalTestCase extends TestCase
      */
     protected $kernel;
 
-    protected function setUpContainer(string $testCaseFile, string $commonFile = 'common.yml') : ContainerInterface
+    protected function setUpContainer(string $testCaseFile, string $commonFile = 'common.yml'): ContainerInterface
     {
         $this->kernel = new TestKernel($testCaseFile, $commonFile);
         $this->kernel->boot();
