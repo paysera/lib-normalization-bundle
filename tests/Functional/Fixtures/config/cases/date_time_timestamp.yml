@@ -1,0 +1,4 @@
+paysera_normalization:
+    register_normalizers:
+        date_time:
+            format: 'U' # timestamp

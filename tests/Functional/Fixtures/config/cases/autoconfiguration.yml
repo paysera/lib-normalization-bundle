@@ -1,0 +1,7 @@
+paysera_normalization: ~
+
+services:
+    _defaults:
+        autoconfigure: true
+
+    Paysera\Bundle\NormalizationBundle\Tests\Functional\Fixtures\Normalizer\MyClassNormalizer: ~

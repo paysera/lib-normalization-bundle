@@ -1,0 +1,23 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <service id="paysera_normalization.date_time_normalizer"
+                 class="Paysera\Component\Normalization\Normalizer\DateTimeNormalizer"
+        >
+            <argument>%paysera_normalization.date_time_normalizer.format%</argument>
+            <tag name="paysera_normalization.autoconfigured_normalizer"/>
+        </service>
+
+        <service id="paysera_normalization.date_time_immutable_normalizer"
+                 class="Paysera\Component\Normalization\Normalizer\DateTimeImmutableNormalizer"
+        >
+            <argument>%paysera_normalization.date_time_normalizer.format%</argument>
+            <tag name="paysera_normalization.autoconfigured_normalizer"/>
+            <tag name="paysera_normalization.mixed_type_denormalizer" type="DateTimeInterface"/>
+        </service>
+    </services>
+</container>

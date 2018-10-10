@@ -1,0 +1,4 @@
+paysera_normalization:
+    register_normalizers:
+        date_time:
+            format: 'Y-m-d\TH:i:sP' # RFC3339
