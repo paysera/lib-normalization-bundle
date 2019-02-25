@@ -9,7 +9,7 @@
     },
     "require": {
         "php": "^7.0",
-        "paysera/lib-normalization": "dev-master",
+        "paysera/lib-normalization": "^0.1.0",
         "symfony/framework-bundle": "^2.7|^3.0|^4.0",
         "maba/dependency-injection-extra": "^0.1.1"
     },
@@ -23,6 +23,5 @@
         "psr-4": {
             "Paysera\\Bundle\\NormalizationBundle\\Tests\\": "tests/"
         }
-    },
-    "minimum-stability": "dev"
+    }
 }
