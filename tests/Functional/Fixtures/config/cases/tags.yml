@@ -20,3 +20,5 @@ services:
         tags:
             - name: paysera_normalization.mixed_type_denormalizer
               type: my_class_scalar
+            - name: paysera_normalization.mixed_type_denormalizer
+              type: my_class_scalar2

@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace Paysera\Bundle\NormalizationBundle;
 
-use Maba\Component\DependencyInjection\AddTaggedCompilerPass;
+use Paysera\Component\DependencyInjection\AddTaggedCompilerPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 

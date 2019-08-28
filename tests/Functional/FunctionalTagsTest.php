@@ -52,5 +52,8 @@ class FunctionalTagsTest extends FunctionalTestCase
 
         $denormalizedFromScalar = $this->coreDenormalizer->denormalize('value', 'my_class_scalar');
         $this->assertEquals($entity, $denormalizedFromScalar);
+
+        $denormalizedFromScalar = $this->coreDenormalizer->denormalize('value', 'my_class_scalar2');
+        $this->assertEquals($entity, $denormalizedFromScalar);
     }
 }
