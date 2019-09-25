@@ -1,0 +1,42 @@
+paysera_normalization: ~
+
+services:
+    Paysera\Bundle\NormalizationBundle\Tests\Functional\Fixtures\Normalizer\MyClassNormalizer:
+        tags:
+            - name: paysera_normalization.autoconfigured_normalizer
+
+    Paysera\Bundle\NormalizationBundle\Tests\Functional\Fixtures\Normalizer\ExtendedMyClassNormalizer:
+        tags:
+            - name: paysera_normalization.autoconfigured_normalizer
+              group: extended
+
+    custom_normalizer:
+        class: Paysera\Bundle\NormalizationBundle\Tests\Functional\Fixtures\Normalizer\MyClassNormalizer
+        tags:
+            - name: paysera_normalization.normalizer
+              type: my_class
+            - name: paysera_normalization.object_denormalizer
+              type: my_class
+            - name: paysera_normalization.normalizer
+              type: my_class2
+            - name: paysera_normalization.object_denormalizer
+              type: my_class2
+            - name: paysera_normalization.object_denormalizer
+              type: my_class_scalar
+
+    custom_extended_normalizer:
+        class: Paysera\Bundle\NormalizationBundle\Tests\Functional\Fixtures\Normalizer\ExtendedMyClassNormalizer
+        tags:
+            - name: paysera_normalization.normalizer
+              type: my_class
+              group: extended
+            - name: paysera_normalization.object_denormalizer
+              type: my_class
+              group: extended
+
+    Paysera\Bundle\NormalizationBundle\Tests\Functional\Fixtures\Normalizer\MyClassMixedTypeDenormalizer:
+        class: Paysera\Bundle\NormalizationBundle\Tests\Functional\Fixtures\Normalizer\MyClassMixedTypeDenormalizer
+        tags:
+            - name: paysera_normalization.mixed_type_denormalizer
+              type: my_class_scalar
+              group: extended

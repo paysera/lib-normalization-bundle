@@ -13,8 +13,8 @@ class FunctionalDateTimeNormalizerTest extends FunctionalTestCase
     public function testDateTimeNormalizerWithTimestampFormat()
     {
         $container = $this->setUpContainer('date_time_timestamp.yml');
-        $coreDenormalizer = $container->get('paysera_normalization.core_denormalizer');
-        $coreNormalizer = $container->get('paysera_normalization.core_normalizer');
+        $coreDenormalizer = $container->get('core_denormalizer');
+        $coreNormalizer = $container->get('core_normalizer');
 
         $timestamp = 1514808794;
 
@@ -43,8 +43,8 @@ class FunctionalDateTimeNormalizerTest extends FunctionalTestCase
     public function testDateTimeNormalizer()
     {
         $container = $this->setUpContainer('date_time.yml');
-        $coreDenormalizer = $container->get('paysera_normalization.core_denormalizer');
-        $coreNormalizer = $container->get('paysera_normalization.core_normalizer');
+        $coreDenormalizer = $container->get('core_denormalizer');
+        $coreNormalizer = $container->get('core_normalizer');
 
         $timestamp = 1514808794;
 

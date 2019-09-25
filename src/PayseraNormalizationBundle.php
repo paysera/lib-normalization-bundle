@@ -13,28 +13,29 @@ class PayseraNormalizationBundle extends Bundle
     {
         // must be TypeAwareInterface, added with autoconfiguration, registered by implemented interfaces
         $container->addCompilerPass(new AddTaggedCompilerPass(
-            'paysera_normalization.normalizer_registry',
+            'paysera_normalization.normalizer_registry_provider',
             'paysera_normalization.autoconfigured_normalizer',
-            'addTypeAwareNormalizer'
+            'addTypeAwareNormalizer',
+            ['group' => null]
         ));
 
         $container->addCompilerPass(new AddTaggedCompilerPass(
-            'paysera_normalization.normalizer_registry',
+            'paysera_normalization.normalizer_registry_provider',
             'paysera_normalization.normalizer',
             'addNormalizer',
-            ['type' => null]
+            ['type' => null, 'group' => null]
         ));
         $container->addCompilerPass(new AddTaggedCompilerPass(
-            'paysera_normalization.normalizer_registry',
+            'paysera_normalization.normalizer_registry_provider',
             'paysera_normalization.mixed_type_denormalizer',
             'addMixedTypeDenormalizer',
-            ['type' => null]
+            ['type' => null, 'group' => null]
         ));
         $container->addCompilerPass(new AddTaggedCompilerPass(
-            'paysera_normalization.normalizer_registry',
+            'paysera_normalization.normalizer_registry_provider',
             'paysera_normalization.object_denormalizer',
             'addObjectDenormalizer',
-            ['type' => null]
+            ['type' => null, 'group' => null]
         ));
     }
 }

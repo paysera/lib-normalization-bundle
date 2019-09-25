@@ -16,7 +16,7 @@ class FunctionalCoreDenormalizerTest extends FunctionalTestCase
     {
         parent::setUp();
         $container = $this->setUpContainer('basic.yml');
-        $this->coreDenormalizer = $container->get('paysera_normalization.core_denormalizer');
+        $this->coreDenormalizer = $container->get('core_denormalizer');
     }
 
     /**

@@ -1,2 +1,10 @@
 framework:
     secret: 'secret'
+
+services:
+    core_denormalizer:
+        alias: paysera_normalization.core_denormalizer
+        public: true
+    core_normalizer:
+        alias: paysera_normalization.core_normalizer
+        public: true

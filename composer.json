@@ -1,5 +1,7 @@
 {
     "name": "paysera/lib-normalization-bundle",
+    "description": "De/normalize business objects without tightly coupling them to your normalization format",
+    "keywords": ["normalizer", "denormalizer", "serializer", "normalization", "denormalization", "serialization", "json"],
     "type": "symfony-bundle",
     "license": "MIT",
     "autoload": {
@@ -7,21 +9,30 @@
             "Paysera\\Bundle\\NormalizationBundle\\": "src/"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "Paysera\\Bundle\\NormalizationBundle\\Tests\\": "tests/"
+        }
+    },
     "require": {
         "php": "^7.0",
-        "paysera/lib-normalization": "^0.1.0",
+        "paysera/lib-normalization": "dev-master",
         "symfony/framework-bundle": "^2.7|^3.0|^4.0",
         "paysera/lib-dependency-injection": "^1.1.0"
     },
     "require-dev": {
         "phpunit/phpunit": "^6.0",
-        "paysera/lib-php-cs-fixer-config": "^2.0.0",
-        "friendsofphp/php-cs-fixer": "^2.2,<2.11.2",
-        "symfony/yaml": "^2.7|^3.0|^4.0"
+        "paysera/lib-php-cs-fixer-config": "^2.2.2",
+        "symfony/yaml": "^2.7|^3.0|^4.0",
+        "mockery/mockery": "^1.2"
     },
-    "autoload-dev": {
-        "psr-4": {
-            "Paysera\\Bundle\\NormalizationBundle\\Tests\\": "tests/"
-        }
+    "config": {
+        "bin-dir": "bin"
+    },
+    "scripts": {
+        "phpunit": "phpunit",
+        "fix-cs": "paysera-php-cs-fixer fix",
+        "test-cs": "paysera-php-cs-fixer fix --dry-run -v",
+        "test": ["@phpunit", "@test-cs"]
     }
 }

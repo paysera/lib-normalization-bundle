@@ -5,27 +5,33 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
+        <service id="paysera_normalization.normalizer_registry_provider"
+                 class="Paysera\Component\Normalization\Registry\GroupedNormalizerRegistryProvider"
+                 lazy="true">
+            <!-- Configured additionally by DIC tags, see PayseraNormalizationBundle::build -->
+        </service>
+
         <service id="paysera_normalization.normalizer_registry"
-                 class="Paysera\Component\Normalization\NormalizerRegistry"
-                 public="true"
-                 lazy="true"/>
+                 class="Paysera\Component\Normalization\NormalizerRegistryInterface"
+                 lazy="true">
+            <factory service="paysera_normalization.normalizer_registry_provider"
+                     method="getDefaultNormalizerRegistry"/>
+        </service>
 
-        <service id="paysera_normalization.type_guesser" class="Paysera\Component\Normalization\TypeGuesser"
-                 public="true"/>
+        <service id="paysera_normalization.type_guesser" class="Paysera\Component\Normalization\TypeGuesser"/>
 
-        <service id="paysera_normalization.data_filter" class="Paysera\Component\Normalization\DataFilter"
-                 public="true"/>
+        <service id="paysera_normalization.data_filter" class="Paysera\Component\Normalization\DataFilter"/>
 
-        <service id="paysera_normalization.core_normalizer" class="Paysera\Component\Normalization\CoreNormalizer"
-                 public="true">
-            <argument type="service" id="paysera_normalization.normalizer_registry"/>
+        <service id="paysera_normalization.core_normalizer" class="Paysera\Component\Normalization\CoreNormalizer">
+            <argument type="service" id="paysera_normalization.normalizer_registry_provider"/>
             <argument type="service" id="paysera_normalization.type_guesser"/>
             <argument type="service" id="paysera_normalization.data_filter"/>
         </service>
+        <service id="Paysera\Component\Normalization\CoreNormalizer" alias="paysera_normalization.core_normalizer"/>
 
-        <service id="paysera_normalization.core_denormalizer" class="Paysera\Component\Normalization\CoreDenormalizer"
-                 public="true">
-            <argument type="service" id="paysera_normalization.normalizer_registry"/>
+        <service id="paysera_normalization.core_denormalizer" class="Paysera\Component\Normalization\CoreDenormalizer">
+            <argument type="service" id="paysera_normalization.normalizer_registry_provider"/>
         </service>
+        <service id="Paysera\Component\Normalization\CoreDenormalizer" alias="paysera_normalization.core_denormalizer"/>
     </services>
 </container>

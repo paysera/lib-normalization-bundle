@@ -29,8 +29,8 @@ class FunctionalAutoconfigurationTest extends FunctionalTestCase
         }
 
         $container = $this->setUpContainer('autoconfiguration.yml');
-        $this->coreDenormalizer = $container->get('paysera_normalization.core_denormalizer');
-        $this->coreNormalizer = $container->get('paysera_normalization.core_normalizer');
+        $this->coreDenormalizer = $container->get('core_denormalizer');
+        $this->coreNormalizer = $container->get('core_normalizer');
     }
 
     public function testAutoconfiguration()

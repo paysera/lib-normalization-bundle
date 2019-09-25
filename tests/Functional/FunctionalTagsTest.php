@@ -23,8 +23,8 @@ class FunctionalTagsTest extends FunctionalTestCase
     {
         parent::setUp();
         $container = $this->setUpContainer('tags.yml');
-        $this->coreDenormalizer = $container->get('paysera_normalization.core_denormalizer');
-        $this->coreNormalizer = $container->get('paysera_normalization.core_normalizer');
+        $this->coreDenormalizer = $container->get('core_denormalizer');
+        $this->coreNormalizer = $container->get('core_normalizer');
     }
 
     public function testTags()
