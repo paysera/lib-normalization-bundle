@@ -16,8 +16,8 @@
     },
     "require": {
         "php": "^7.0",
-        "paysera/lib-normalization": "dev-master",
-        "symfony/framework-bundle": "^2.7|^3.0|^4.0",
+        "paysera/lib-normalization": "^0.1.2",
+        "symfony/framework-bundle": "^3.4.26|^4.2.7",
         "paysera/lib-dependency-injection": "^1.1.0"
     },
     "require-dev": {
