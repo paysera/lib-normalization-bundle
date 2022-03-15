@@ -24,7 +24,7 @@ abstract class FunctionalTestCase extends TestCase
         return $this->kernel->getContainer();
     }
 
-    protected function tearDown()
+    protected function tearDownTest()
     {
         $container = $this->kernel->getContainer();
         $this->kernel->shutdown();

@@ -38,6 +38,7 @@ class FunctionalDateTimeNormalizerTest extends FunctionalTestCase
         $denormalized = $coreDenormalizer->denormalize($normalized, DateTime::class);
         $this->assertInstanceOf(DateTime::class, $denormalized);
         $this->assertSame($timestamp, $denormalized->getTimestamp());
+        $this->tearDownTest();
     }
 
     public function testDateTimeNormalizer()
@@ -68,5 +69,6 @@ class FunctionalDateTimeNormalizerTest extends FunctionalTestCase
         $denormalized = $coreDenormalizer->denormalize($normalized, DateTime::class);
         $this->assertInstanceOf(DateTime::class, $denormalized);
         $this->assertSame($timestamp, $denormalized->getTimestamp());
+        $this->tearDownTest();
     }
 }

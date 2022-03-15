@@ -11,8 +11,11 @@ class Configuration implements ConfigurationInterface
 {
     public function getConfigTreeBuilder()
     {
-        $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('paysera_normalization');
+        $treeBuilder = new TreeBuilder('paysera_normalization');
+        $rootNode = method_exists($treeBuilder, 'getRootNode')
+            ? $treeBuilder->getRootNode()
+            : $treeBuilder->root('paysera_normalization')
+        ;
 
         $children = $rootNode->children();
 

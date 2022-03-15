@@ -20,7 +20,7 @@ class FunctionalAutoconfigurationTest extends FunctionalTestCase
      */
     private $coreNormalizer;
 
-    protected function setUp()
+    protected function setUpTest()
     {
         parent::setUp();
 
@@ -35,13 +35,22 @@ class FunctionalAutoconfigurationTest extends FunctionalTestCase
 
     public function testAutoconfiguration()
     {
+        $this->setUpTest();
         $entity = (new MyClass())->setField('value');
 
         $normalized = $this->coreNormalizer->normalize($entity);
-        $this->assertInternalType('object', $normalized);
+
+        if (method_exists($this, 'assertIsObject')) {
+            $this->assertIsObject($normalized);
+        } else {
+            $this->assertInternalType('object', $normalized);
+        }
+
         $this->assertInstanceOf('stdClass', $normalized);
 
         $denormalized = $this->coreDenormalizer->denormalize($normalized, MyClass::class);
         $this->assertEquals($entity, $denormalized);
+
+        $this->tearDownTest();
     }
 }

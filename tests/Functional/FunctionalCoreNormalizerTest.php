@@ -13,7 +13,7 @@ class FunctionalCoreNormalizerTest extends FunctionalTestCase
      */
     private $coreNormalizer;
 
-    protected function setUp()
+    protected function setUpTest()
     {
         parent::setUp();
         $container = $this->setUpContainer('basic.yml');
@@ -28,7 +28,9 @@ class FunctionalCoreNormalizerTest extends FunctionalTestCase
      */
     public function testNormalization($expectedResult, $data)
     {
+        $this->setUpTest();
         $this->assertEquals($expectedResult, $this->coreNormalizer->normalize($data));
+        $this->tearDownTest();
     }
 
     /**
@@ -39,8 +41,10 @@ class FunctionalCoreNormalizerTest extends FunctionalTestCase
      */
     public function testNormalizationWithIncludedFields($expectedResult, $data, array $includedFields)
     {
+        $this->setUpTest();
         $context = new NormalizationContext($this->coreNormalizer, $includedFields);
         $this->assertEquals($expectedResult, $this->coreNormalizer->normalize($data, null, $context));
+        $this->tearDownTest();
     }
 
     /**
@@ -51,7 +55,9 @@ class FunctionalCoreNormalizerTest extends FunctionalTestCase
      */
     public function testNormalizationWithType($expectedResult, $data, string $type)
     {
+        $this->setUpTest();
         $this->assertEquals($expectedResult, $this->coreNormalizer->normalize($data, $type));
+        $this->tearDownTest();
     }
 
     public function normalizationProvider()

@@ -21,7 +21,7 @@ class FunctionalGroupsTest extends FunctionalTestCase
      */
     private $coreNormalizer;
 
-    protected function setUp()
+    protected function setUpTest()
     {
         parent::setUp();
         $container = $this->setUpContainer('groups.yml');
@@ -31,6 +31,7 @@ class FunctionalGroupsTest extends FunctionalTestCase
 
     public function testGroupsWithAutoconfiguredTag()
     {
+        $this->setUpTest();
         $entity = (new MyClass())->setField('value');
 
         $normalized = $this->coreNormalizer->normalize($entity);
@@ -54,10 +55,12 @@ class FunctionalGroupsTest extends FunctionalTestCase
             new DenormalizationContext($this->coreDenormalizer, 'extended')
         );
         $this->assertSame('value:ext', $denormalizedExt->getField());
+        $this->tearDownTest();
     }
 
     public function testGroupsWithBasicTags()
     {
+        $this->setUpTest();
         $entity = (new MyClass())->setField('value');
 
         $normalized = $this->coreNormalizer->normalize($entity, 'my_class');
@@ -81,10 +84,12 @@ class FunctionalGroupsTest extends FunctionalTestCase
             new DenormalizationContext($this->coreDenormalizer, 'extended')
         );
         $this->assertSame('value:ext', $denormalizedExt->getField());
+        $this->tearDownTest();
     }
 
     public function testGroupsWithFallback()
     {
+        $this->setUpTest();
         $entity = (new MyClass())->setField('value');
 
         $normalizedExt = $this->coreNormalizer->normalize($entity, 'my_class2', new NormalizationContext(
@@ -101,10 +106,12 @@ class FunctionalGroupsTest extends FunctionalTestCase
             new DenormalizationContext($this->coreDenormalizer, 'extended')
         );
         $this->assertSame('value', $denormalizedExt->getField());
+        $this->tearDownTest();
     }
 
     public function testGroupsWithMixedDenormalizerTag()
     {
+        $this->setUpTest();
         /** @var MyClass $denormalizedFromScalar */
         $denormalizedFromScalar = $this->coreDenormalizer->denormalize(
             'value',
@@ -112,5 +119,6 @@ class FunctionalGroupsTest extends FunctionalTestCase
             new DenormalizationContext($this->coreDenormalizer, 'extended')
         );
         $this->assertSame('value', $denormalizedFromScalar->getField());
+        $this->tearDownTest();
     }
 }
