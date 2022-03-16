@@ -15,7 +15,7 @@ matrix:
     - php: "7.2"
       env: COMPOSER_ARGS=""
     - php: "7.3"
-      env: COMPOSER_ARGS="" WITH_CS="true"
+      env: COMPOSER_ARGS=""
     - php: "8.0"
       env: COMPOSER_ARGS=""
 
