@@ -19,9 +19,9 @@ class FunctionalTagsTest extends FunctionalTestCase
      */
     private $coreNormalizer;
 
-    protected function setUpTest()
+    protected function set_up()
     {
-        parent::setUp();
+        parent::set_up();
         $container = $this->setUpContainer('tags.yml');
         $this->coreDenormalizer = $container->get('core_denormalizer');
         $this->coreNormalizer = $container->get('core_normalizer');
@@ -29,7 +29,6 @@ class FunctionalTagsTest extends FunctionalTestCase
 
     public function testTags()
     {
-        $this->setUpTest();
         $entity = (new MyClass())->setField('value');
 
         $normalized = $this->coreNormalizer->normalize($entity);
@@ -42,12 +41,10 @@ class FunctionalTagsTest extends FunctionalTestCase
 
         $denormalized = $this->coreDenormalizer->denormalize($normalized, MyClass::class);
         $this->assertEquals($entity, $denormalized);
-        $this->tearDownTest();
     }
 
     public function testTagsWithType()
     {
-        $this->setUpTest();
         $entity = (new MyClass())->setField('value');
 
         $normalized = $this->coreNormalizer->normalize($entity, 'my_class');
@@ -66,6 +63,5 @@ class FunctionalTagsTest extends FunctionalTestCase
 
         $denormalizedFromScalar = $this->coreDenormalizer->denormalize('value', 'my_class_scalar2');
         $this->assertEquals($entity, $denormalizedFromScalar);
-        $this->tearDownTest();
     }
 }

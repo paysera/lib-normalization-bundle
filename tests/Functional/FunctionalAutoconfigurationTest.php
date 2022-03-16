@@ -20,9 +20,9 @@ class FunctionalAutoconfigurationTest extends FunctionalTestCase
      */
     private $coreNormalizer;
 
-    protected function setUpTest()
+    protected function set_up()
     {
-        parent::setUp();
+        parent::set_up();
 
         if (!PayseraNormalizationExtension::supportsAutoconfiguration()) {
             $this->markTestSkipped('This symfony version does not support autoconfiguration');
@@ -35,7 +35,6 @@ class FunctionalAutoconfigurationTest extends FunctionalTestCase
 
     public function testAutoconfiguration()
     {
-        $this->setUpTest();
         $entity = (new MyClass())->setField('value');
 
         $normalized = $this->coreNormalizer->normalize($entity);
@@ -50,7 +49,5 @@ class FunctionalAutoconfigurationTest extends FunctionalTestCase
 
         $denormalized = $this->coreDenormalizer->denormalize($normalized, MyClass::class);
         $this->assertEquals($entity, $denormalized);
-
-        $this->tearDownTest();
     }
 }

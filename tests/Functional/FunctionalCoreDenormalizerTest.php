@@ -12,9 +12,9 @@ class FunctionalCoreDenormalizerTest extends FunctionalTestCase
      */
     private $coreDenormalizer;
 
-    protected function setUpTest()
+    protected function set_up()
     {
-        parent::setUp();
+        parent::set_up();
         $container = $this->setUpContainer('basic.yml');
         $this->coreDenormalizer = $container->get('core_denormalizer');
     }
@@ -28,9 +28,7 @@ class FunctionalCoreDenormalizerTest extends FunctionalTestCase
      */
     public function testDenormalization($expectedResult, $data, string $type)
     {
-        $this->setUpTest();
         $this->assertEquals($expectedResult, $this->coreDenormalizer->denormalize($data, $type));
-        $this->tearDownTest();
     }
 
     public function denormalizationProvider()
