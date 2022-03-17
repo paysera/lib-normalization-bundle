@@ -21,9 +21,9 @@ class FunctionalGroupsTest extends FunctionalTestCase
      */
     private $coreNormalizer;
 
-    protected function setUp()
+    protected function set_up()
     {
-        parent::setUp();
+        parent::set_up();
         $container = $this->setUpContainer('groups.yml');
         $this->coreDenormalizer = $container->get('core_denormalizer');
         $this->coreNormalizer = $container->get('core_normalizer');

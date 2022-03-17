@@ -19,9 +19,9 @@ class FunctionalTagsTest extends FunctionalTestCase
      */
     private $coreNormalizer;
 
-    protected function setUp()
+    protected function set_up()
     {
-        parent::setUp();
+        parent::set_up();
         $container = $this->setUpContainer('tags.yml');
         $this->coreDenormalizer = $container->get('core_denormalizer');
         $this->coreNormalizer = $container->get('core_normalizer');
@@ -32,7 +32,11 @@ class FunctionalTagsTest extends FunctionalTestCase
         $entity = (new MyClass())->setField('value');
 
         $normalized = $this->coreNormalizer->normalize($entity);
-        $this->assertInternalType('object', $normalized);
+        if (method_exists($this, 'assertIsObject')) {
+            $this->assertIsObject($normalized);
+        } else {
+            $this->assertInternalType('object', $normalized);
+        }
         $this->assertInstanceOf('stdClass', $normalized);
 
         $denormalized = $this->coreDenormalizer->denormalize($normalized, MyClass::class);
@@ -44,7 +48,11 @@ class FunctionalTagsTest extends FunctionalTestCase
         $entity = (new MyClass())->setField('value');
 
         $normalized = $this->coreNormalizer->normalize($entity, 'my_class');
-        $this->assertInternalType('object', $normalized);
+        if (method_exists($this, 'assertIsObject')) {
+            $this->assertIsObject($normalized);
+        } else {
+            $this->assertInternalType('object', $normalized);
+        }
         $this->assertInstanceOf('stdClass', $normalized);
 
         $denormalized = $this->coreDenormalizer->denormalize($normalized, 'my_class');

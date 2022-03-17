@@ -4,10 +4,10 @@ declare(strict_types=1);
 namespace Paysera\Bundle\NormalizationBundle\Tests\Functional;
 
 use Paysera\Bundle\NormalizationBundle\Tests\Functional\Fixtures\TestKernel;
-use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\DependencyInjection\ResettableContainerInterface;
 use Symfony\Component\Filesystem\Filesystem;
+use Yoast\PHPUnitPolyfills\TestCases\TestCase;
 
 abstract class FunctionalTestCase extends TestCase
 {
@@ -24,7 +24,7 @@ abstract class FunctionalTestCase extends TestCase
         return $this->kernel->getContainer();
     }
 
-    protected function tearDown()
+    protected function tear_down()
     {
         $container = $this->kernel->getContainer();
         $this->kernel->shutdown();

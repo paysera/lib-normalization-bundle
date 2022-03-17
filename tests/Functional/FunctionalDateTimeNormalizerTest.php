@@ -50,9 +50,12 @@ class FunctionalDateTimeNormalizerTest extends FunctionalTestCase
 
         $dateTime = new DateTime('now', new DateTimeZone('Europe/Vilnius'));
         $dateTime->setTimestamp($timestamp);
+        $expected = new DateTime('now', new DateTimeZone(date_default_timezone_get()));
+        $expected->setTimestamp($timestamp);
+
         $normalized = $coreNormalizer->normalize($dateTime);
 
-        $this->assertSame('2018-01-01T12:13:14+00:00', $normalized);
+        $this->assertSame($expected->format('Y-m-d\TH:i:sP'), $normalized);
 
         /** @var DateTimeImmutable $denormalized */
         $denormalized = $coreDenormalizer->denormalize($normalized, DateTimeImmutable::class);

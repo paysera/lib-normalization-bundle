@@ -13,9 +13,9 @@ class FunctionalCoreNormalizerTest extends FunctionalTestCase
      */
     private $coreNormalizer;
 
-    protected function setUp()
+    protected function set_up()
     {
-        parent::setUp();
+        parent::set_up();
         $container = $this->setUpContainer('basic.yml');
         $this->coreNormalizer = $container->get('core_normalizer');
     }
