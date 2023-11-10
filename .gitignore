@@ -2,3 +2,5 @@ vendor/
 composer.lock
 bin/
 phpunit.xml
+
+.phpunit.result.cache
