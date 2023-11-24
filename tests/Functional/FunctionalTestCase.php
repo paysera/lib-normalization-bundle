@@ -5,6 +5,7 @@ namespace Paysera\Bundle\NormalizationBundle\Tests\Functional;
 
 use Paysera\Bundle\NormalizationBundle\Tests\Functional\Fixtures\TestKernel;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\DependencyInjection\ResettableContainerInterface;
 use Symfony\Contracts\Service\ResetInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Yoast\PHPUnitPolyfills\TestCases\TestCase;
@@ -28,7 +29,10 @@ abstract class FunctionalTestCase extends TestCase
     {
         $container = $this->kernel->getContainer();
         $this->kernel->shutdown();
-        if ($container instanceof ResetInterface) {
+        if (
+            $container instanceof ResettableContainerInterface
+            || $container instanceof ResetInterface
+        ) {
             $container->reset();
         }
 
