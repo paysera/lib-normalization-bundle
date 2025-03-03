@@ -9,6 +9,9 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 class PayseraNormalizationBundle extends Bundle
 {
+    /**
+     * @return void
+     */
     public function build(ContainerBuilder $container)
     {
         // must be TypeAwareInterface, added with autoconfiguration, registered by implemented interfaces
