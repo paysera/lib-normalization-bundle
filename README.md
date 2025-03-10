@@ -1,11 +1,12 @@
 # Paysera Normalization Bundle
 
-[![Latest Version on Packagist][ico-version]][link-packagist]
-[![Software License][ico-license]](LICENSE)
-[![Build Status][ico-travis]][link-travis]
+[![Build Status][ico-build]][link-build]
 [![Coverage Status][ico-scrutinizer]][link-scrutinizer]
 [![Quality Score][ico-code-quality]][link-code-quality]
-[![Total Downloads][ico-downloads]][link-downloads]
+[![Total Downloads][ico-downloads]][link-packagist]
+[![Latest Stable Version][ico-version]][link-packagist]
+[![PHP Version Require][ico-php]][link-packagist]
+[![License][ico-license]](LICENSE)
 
 This bundle allows to de/normalize your business entities (plain PHP objects)
 without tightly coupling them with your normalization format. You would usually do this
@@ -399,15 +400,15 @@ You can fix any code style issues using this command:
 composer fix-cs
 ```
 
-[ico-version]: https://img.shields.io/packagist/v/paysera/lib-normalization-bundle.svg?style=flat-square
-[ico-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square
-[ico-travis]: https://img.shields.io/travis/paysera/lib-normalization-bundle/master.svg?style=flat-square
-[ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/paysera/lib-normalization-bundle.svg?style=flat-square
-[ico-code-quality]: https://img.shields.io/scrutinizer/g/paysera/lib-normalization-bundle.svg?style=flat-square
-[ico-downloads]: https://img.shields.io/packagist/dt/paysera/lib-normalization-bundle.svg?style=flat-square
+[ico-build]: https://github.com/paysera/lib-normalization-bundle/workflows/CI/badge.svg
+[ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/paysera/lib-normalization-bundle.svg
+[ico-code-quality]: https://img.shields.io/scrutinizer/g/paysera/lib-normalization-bundle.svg
+[ico-downloads]: https://img.shields.io/packagist/dt/paysera/lib-normalization-bundle.svg
+[ico-version]: https://img.shields.io/packagist/v/paysera/lib-normalization-bundle.svg
+[ico-php]: https://img.shields.io/packagist/dependency-v/paysera/lib-normalization-bundle/php
+[ico-license]: https://img.shields.io/github/license/paysera/lib-normalization-bundle?color=blue
 
-[link-packagist]: https://packagist.org/packages/paysera/lib-normalization-bundle
-[link-travis]: https://travis-ci.org/paysera/lib-normalization-bundle
+[link-build]: https://github.com/paysera/lib-normalization-bundle/actions
 [link-scrutinizer]: https://scrutinizer-ci.com/g/paysera/lib-normalization-bundle/code-structure
 [link-code-quality]: https://scrutinizer-ci.com/g/paysera/lib-normalization-bundle
-[link-downloads]: https://packagist.org/packages/paysera/lib-normalization-bundle
+[link-packagist]: https://packagist.org/packages/paysera/lib-normalization-bundle
