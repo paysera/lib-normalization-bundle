@@ -4,6 +4,20 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 1.4.0
+### Added
+- Support for Symfony 7.4.
+
+### Changed
+- `Configuration::getConfigTreeBuilder()` declares the `TreeBuilder` return type, which Symfony 7 requires.
+  Breaking for subclasses that override `getConfigTreeBuilder()` without a return type: add `: TreeBuilder` to the override.
+- `PayseraNormalizationExtension` extends `Symfony\Component\DependencyInjection\Extension\Extension` instead of
+  `Symfony\Component\HttpKernel\DependencyInjection\Extension` (internal since Symfony 7.1, deprecated in 8.1), and
+  `load()` documents its `void` return. This removes the two deprecation notices Symfony 6.4 and 7.4 report for the
+  bundle's own classes.
+- `symfony/config`, `symfony/dependency-injection` and `symfony/http-kernel`, which the bundle's code uses, are required
+  explicitly, at the same versions as `symfony/framework-bundle`.
+
 ## 1.3.1
 ### Added
 - `void` phpdoc typehint to `PayseraNormalizationBundle::build` method to fix the deprecation message on Symfony 6
