@@ -22,10 +22,8 @@ class FunctionalDeprecationNoticesTest extends TestCase
      */
     public function testLoadingTheBundleClassesRaisesNoDeprecationNamingThem()
     {
-        if (!class_exists(DebugClassLoader::class)) {
-            $this->markTestSkipped('symfony/error-handler is not installed (Symfony below 4.4)');
-        }
-
+        // collect before anything loads: on PHP 8.4, compiling Symfony 4.4's own files raises deprecation notices, and a
+        // notice that reaches the child process's output fails the test whatever it says
         $deprecations = [];
         set_error_handler(function ($type, $message) use (&$deprecations) {
             if ($type === E_USER_DEPRECATED || $type === E_DEPRECATED) {
@@ -34,13 +32,19 @@ class FunctionalDeprecationNoticesTest extends TestCase
 
             return true;
         });
-        DebugClassLoader::enable();
         try {
-            class_exists(PayseraNormalizationBundle::class);
-            class_exists(PayseraNormalizationExtension::class);
-            class_exists(Configuration::class);
+            if (!class_exists(DebugClassLoader::class)) {
+                $this->markTestSkipped('symfony/error-handler is not installed (Symfony below 4.4)');
+            }
+            DebugClassLoader::enable();
+            try {
+                class_exists(PayseraNormalizationBundle::class);
+                class_exists(PayseraNormalizationExtension::class);
+                class_exists(Configuration::class);
+            } finally {
+                DebugClassLoader::disable();
+            }
         } finally {
-            DebugClassLoader::disable();
             restore_error_handler();
         }
 
