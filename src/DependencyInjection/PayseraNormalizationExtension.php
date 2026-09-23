@@ -17,6 +17,7 @@ class PayseraNormalizationExtension extends Extension
     }
 
     /**
+     * @param array<array<mixed>> $configs
      * @return void
      */
     public function load(array $configs, ContainerBuilder $container)
