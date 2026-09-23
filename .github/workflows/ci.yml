@@ -33,6 +33,7 @@ jobs:
           - '4.*'
           - '5.*'
           - '6.*'
+          - '7.*'
         dependency:
           - 'highest'
         include:
@@ -43,6 +44,13 @@ jobs:
           - { php: '7.2', symfony: '6.*' }
           - { php: '7.3', symfony: '6.*' }
           - { php: '7.4', symfony: '6.*' }
+          - { php: '7.0', symfony: '7.*' }
+          - { php: '7.1', symfony: '7.*' }
+          - { php: '7.2', symfony: '7.*' }
+          - { php: '7.3', symfony: '7.*' }
+          - { php: '7.4', symfony: '7.*' }
+          - { php: '8.0', symfony: '7.*' }
+          - { php: '8.1', symfony: '7.*' }
 
     steps:
       - name: Checkout
@@ -53,6 +61,13 @@ jobs:
         with:
           php-version: ${{ matrix.php }}
           tools: flex
+
+      # Symfony 3.4 and 4.4 are end-of-life, and their symfony/cache releases have security advisories.
+      # Composer 2.10 refuses to install them by default. This only affects the test install here.
+      # PHP 7.0 and 7.1 get Composer 2.2, which does not block advisories and does not know this setting.
+      - name: Allow packages with security advisories
+        if: matrix.php != '7.0' && matrix.php != '7.1'
+        run: composer config policy.advisories.block false
 
       - name: Install dependencies
         uses: ramsey/composer-install@v2
