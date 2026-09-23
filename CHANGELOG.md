@@ -13,8 +13,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   Breaking for subclasses that override `getConfigTreeBuilder()` without a return type: add `: TreeBuilder` to the override.
 - `PayseraNormalizationExtension` extends `Symfony\Component\DependencyInjection\Extension\Extension` instead of
   `Symfony\Component\HttpKernel\DependencyInjection\Extension` (internal since Symfony 7.1, deprecated in 8.1), and
-  `load()` documents its `void` return. This removes the two deprecation notices Symfony 6.4 and 7.4 report for the
-  bundle's own classes.
+  `load()` documents its `void` return. Together with the return type above, this removes the deprecation notices that
+  Symfony 6.4 and 7.4 report for the bundle's own classes when their debug class loader is on.
 - `symfony/config`, `symfony/dependency-injection` and `symfony/http-kernel`, which the bundle's code uses, are required
   explicitly, at the same versions as `symfony/framework-bundle`.
 
