@@ -22,10 +22,12 @@ class FunctionalDeprecationNoticesTest extends TestCase
      */
     public function testLoadingTheBundleClassesRaisesNoDeprecationNamingThem()
     {
+        $classes = [PayseraNormalizationBundle::class, PayseraNormalizationExtension::class, Configuration::class];
+
         // collect before anything loads: on PHP 8.4, compiling Symfony 4.4's own files raises deprecation notices, and a
         // notice that reaches the child process's output fails the test whatever it says
         $deprecations = [];
-        set_error_handler(function ($type, $message) use (&$deprecations) {
+        set_error_handler(function (int $type, string $message) use (&$deprecations): bool {
             if ($type === E_USER_DEPRECATED || $type === E_DEPRECATED) {
                 $deprecations[] = $message;
             }
@@ -36,11 +38,16 @@ class FunctionalDeprecationNoticesTest extends TestCase
             if (!class_exists(DebugClassLoader::class)) {
                 $this->markTestSkipped('symfony/error-handler is not installed (Symfony below 4.4)');
             }
+            // the check means something only if the classes are loaded here, after the debug class loader is enabled
+            $this->assertSame([false, false, false], array_map(function (string $class): bool {
+                return class_exists($class, false);
+            }, $classes));
+
             DebugClassLoader::enable();
             try {
-                class_exists(PayseraNormalizationBundle::class);
-                class_exists(PayseraNormalizationExtension::class);
-                class_exists(Configuration::class);
+                $loaded = array_map(function (string $class): bool {
+                    return class_exists($class);
+                }, $classes);
             } finally {
                 DebugClassLoader::disable();
             }
@@ -48,7 +55,8 @@ class FunctionalDeprecationNoticesTest extends TestCase
             restore_error_handler();
         }
 
-        $bundleDeprecations = array_values(array_filter($deprecations, function ($message) {
+        $this->assertSame([true, true, true], $loaded);
+        $bundleDeprecations = array_values(array_filter($deprecations, function (string $message): bool {
             return strpos($message, 'Paysera\\Bundle\\NormalizationBundle\\') !== false;
         }));
         $this->assertSame([], $bundleDeprecations);

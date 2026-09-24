@@ -13,12 +13,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `PayseraNormalizationExtension` extends `Symfony\Component\DependencyInjection\Extension\Extension` instead of
   `Symfony\Component\HttpKernel\DependencyInjection\Extension` (internal since Symfony 7.1, deprecated in 8.1), and
   `load()` documents its `void` return. Together with the return type above, this removes the deprecation notices that
-  Symfony 6.4 and 7.4 report for the bundle's own classes when their debug class loader is on. On Symfony 7.4 the bundle's
-  XML service definitions still raise Symfony's own "XML configuration format is deprecated" notice.
+  Symfony 5.4 and later report for the bundle's own classes when their debug class loader is on. On Symfony 7.4 the
+  bundle's XML service definitions still raise Symfony's own "XML configuration format is deprecated" notice.
 - Breaking for subclasses of these two classes: an override of `getConfigTreeBuilder()` must declare `: TreeBuilder`, and a
-  subclass of the extension can no longer call the class-cache methods of Symfony's HttpKernel `Extension`
-  (`addClassesToCompile()`, `addAnnotatedClassesToCompile()` and their getters). The classes are not part of the bundle's
-  public API (see "Semantic versioning" in the README), so this is a minor release.
+  subclass of the extension no longer inherits the class-cache methods of Symfony's HttpKernel `Extension`
+  (`addAnnotatedClassesToCompile()` and its getter, deprecated since Symfony 7.1, and on Symfony 3.4 also
+  `addClassesToCompile()` and its getter): a call to one of them fails and an override of the getter is ignored. The
+  classes are not part of the bundle's public API (see "Semantic versioning" in the README), so this is a minor release.
 - `symfony/config`, `symfony/dependency-injection` and `symfony/http-kernel`, which the bundle's code uses, are required
   explicitly, at the same versions as `symfony/framework-bundle`.
 
