@@ -6,7 +6,7 @@ namespace Paysera\Bundle\NormalizationBundle\DependencyInjection;
 use Paysera\Component\Normalization\TypeAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;
-use Symfony\Component\HttpKernel\DependencyInjection\Extension;
+use Symfony\Component\DependencyInjection\Extension\Extension;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 
 class PayseraNormalizationExtension extends Extension
@@ -16,6 +16,10 @@ class PayseraNormalizationExtension extends Extension
         return method_exists(ContainerBuilder::class, 'registerForAutoconfiguration');
     }
 
+    /**
+     * @param array<array<mixed>|null> $configs
+     * @return void
+     */
     public function load(array $configs, ContainerBuilder $container)
     {
         $configuration = new Configuration();
