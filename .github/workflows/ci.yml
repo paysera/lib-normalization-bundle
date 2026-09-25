@@ -54,6 +54,10 @@ jobs:
           php-version: ${{ matrix.php }}
           tools: flex
 
+      - name: Allow packages with security advisories
+        if: matrix.php != '7.0' && matrix.php != '7.1'
+        run: composer config policy.advisories.block false
+
       - name: Install dependencies
         uses: ramsey/composer-install@v2
         env:
