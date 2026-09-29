@@ -23,7 +23,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   `Resources/config/services/date_time_normalizer.xml`, which are removed, so Symfony 7.4 reports no "XML configuration
   format is deprecated" notice. The service ids, classes, arguments, tags and aliases are unchanged.
 - `symfony/config`, `symfony/dependency-injection` and `symfony/http-kernel`, which the bundle's code uses, are required
-  explicitly, at the same versions as `symfony/framework-bundle`.
+  explicitly. `symfony/framework-bundle`, which only the bundle's tests use, moves to `require-dev`.
+- `paysera/lib-normalization` starts at 1.3.1: in earlier releases `DateTimeNormalizer` fails on PHP 8.2 and later,
+  where `date_get_last_errors()` returns `false`.
 
 ## 1.3.1
 ### Added
