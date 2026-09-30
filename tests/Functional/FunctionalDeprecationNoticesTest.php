@@ -21,12 +21,10 @@ class FunctionalDeprecationNoticesTest extends TestCase
 
         $deprecations = [];
         set_error_handler(function (int $type, string $message) use (&$deprecations): bool {
-            if ($type === E_USER_DEPRECATED || $type === E_DEPRECATED) {
-                $deprecations[] = $message;
-            }
+            $deprecations[] = $message;
 
             return true;
-        });
+        }, E_USER_DEPRECATED | E_DEPRECATED);
         try {
             if (!class_exists(DebugClassLoader::class)) {
                 $this->markTestSkipped('symfony/error-handler is not installed (Symfony below 4.4)');
