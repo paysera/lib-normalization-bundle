@@ -4,6 +4,29 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 1.4.0
+### Added
+- Support for Symfony 7.4.
+
+### Changed
+- `Configuration::getConfigTreeBuilder()` declares the `TreeBuilder` return type, which Symfony 7 requires.
+- `PayseraNormalizationExtension` extends `Symfony\Component\DependencyInjection\Extension\Extension` instead of
+  `Symfony\Component\HttpKernel\DependencyInjection\Extension` (internal since Symfony 7.1, deprecated in 8.1), and
+  `load()` documents its `void` return. Together with the return type above, this removes the deprecation notices that
+  Symfony 5.4 and later report for the bundle's own classes when their debug class loader is on.
+- Breaking for subclasses of these two classes: an override of `getConfigTreeBuilder()` must declare `: TreeBuilder`, and a
+  subclass of the extension no longer inherits the class-cache methods of Symfony's HttpKernel `Extension`
+  (`addAnnotatedClassesToCompile()` and its getter, deprecated since Symfony 7.1, and on Symfony 3.4 also
+  `addClassesToCompile()` and its getter): a call to one of them fails and an override of the getter is ignored. The
+  classes are not part of the bundle's public API (see "Semantic versioning" in the README), so this is a minor release.
+- The bundle's services are defined in `PayseraNormalizationExtension` instead of `Resources/config/services.xml` and
+  `Resources/config/services/date_time_normalizer.xml`, which are removed, so Symfony 7.4 reports no "XML configuration
+  format is deprecated" notice. The service ids, classes, arguments, tags and aliases are unchanged.
+- `symfony/config`, `symfony/dependency-injection` and `symfony/http-kernel`, which the bundle's code uses, are required
+  explicitly. `symfony/framework-bundle`, which only the bundle's tests use, moves to `require-dev`.
+- `paysera/lib-normalization` starts at 1.3.1: in earlier releases `DateTimeNormalizer` fails on PHP 8.2 and later,
+  where `date_get_last_errors()` returns `false`.
+
 ## 1.3.1
 ### Added
 - `void` phpdoc typehint to `PayseraNormalizationBundle::build` method to fix the deprecation message on Symfony 6
